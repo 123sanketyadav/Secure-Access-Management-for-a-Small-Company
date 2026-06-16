@@ -1,0 +1,99 @@
+Scenario: Secure Access Management for a Small Company
+Objective
+
+Implement secure access control using Azure RBAC by creating:
+
+2 Users
+2 Groups
+Assign users to groups
+Provide different access permissions.
+Resources
+Users
+Employee1
+Username: employee1@yourtenant.onmicrosoft.com
+GuestUser
+Invite an external guest user or create:
+guestuser@yourtenant.onmicrosoft.com
+Groups
+Group 1: Developers
+
+Purpose:
+
+Manage Virtual Machines.
+Group 2: StorageTeam
+
+Purpose:
+
+Manage Storage Accounts.
+Implementation Steps
+Step 1: Create Users
+
+Azure Portal →
+Azure Active Directory →
+Users →
+New User
+
+Create:
+
+Employee1
+GuestUser
+Step 2: Create Groups
+
+Azure Active Directory →
+Groups →
+New Group
+
+Create:
+
+Developers
+StorageTeam
+Step 3: Add Users to Groups
+Group	Member
+Developers	Employee1
+StorageTeam	GuestUser
+Step 4: Create Resources
+
+Create:
+
+1 Virtual Machine
+1 Storage Account
+Step 5: Assign RBAC Roles
+Group	Resource	Role
+Developers	Virtual Machine	Virtual Machine Contributor
+StorageTeam	Storage Account	Storage Blob Data Contributor
+Testing
+Employee1
+
+✅ Can manage VM.
+
+❌ Cannot manage Storage Account.
+
+GuestUser
+
+✅ Can upload/download blobs.
+
+❌ Cannot manage VM.
+
+Architecture
+                    Azure Subscription
+                           |
+                  -------------------
+                  |                 |
+            Developers       StorageTeam
+                  |                 |
+           Employee1         GuestUser
+                  |                 |
+          VM Contributor    Blob Contributor
+                  |                 |
+          Virtual Machine   Storage Account
+Expected Output
+
+✅ Two users created.
+
+✅ Two groups created.
+
+✅ Users added to respective groups.
+
+✅ RBAC roles assigned.
+
+✅ Resource access restricted according to assigned roles
